@@ -43,10 +43,9 @@ cd 2025-ADL-Final-Challenge-Release
 ```bash
 # 1. 賦予腳本執行權限
 chmod +x src/run.sh
-```
+
 # 2. 執行腳本 (請確保硬碟空間 > 100GB 以存放權重)
 # 腳本內建自動修復機制，若下載中斷會自動重試
-```bash
 bash src/run.sh
 ```
 
