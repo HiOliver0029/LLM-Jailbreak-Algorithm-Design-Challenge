@@ -27,7 +27,15 @@ title: README
 ### 前置作業
 請確保你擁有一個有效的 Hugging Face Token (需有 Read 權限) 以驗證 Gated Models (如 Llama-3, Mistral 等)。
 
-該程式建立於 [2025-ADL-Final-Challenge-Release](https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release) 專案底下，下載該專案後，請把 code/run.sh 放在 src 底下。
+本專案依賴於 [2025-ADL-Final-Challenge-Release](https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release) 提供的基礎架構。
+
+請先 clone 該儲存庫以取得必要的執行腳本 (un_inference.py, un_eval.py) 與資料集：
+`ash
+git clone https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release.git
+cd 2025-ADL-Final-Challenge-Release
+`
+
+下載完成後，請將本專案的 code/run.sh 複製到 src 資料夾底下。
 
 ### 執行安裝
 `ash
@@ -43,7 +51,7 @@ Note: 腳本會安裝 vllm, unsloth, transformers, bitsandbytes 等高效能推�
 
 ## 2. 使用方法
 
-該程式建立於 [2025-ADL-Final-Challenge-Release](https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release) 專案底下，請把 code/algorithms.py 取代原本的 src/algorithms.py，並執行：
+請將本專案的 code/algorithms.py 取代原本的 src/algorithms.py，並執行：
 
 `ash
 # 使用簡單版評估 (Single Model + Rerank)
