@@ -32,22 +32,23 @@ title: README
 請先 clone 該儲存庫以取得必要的執行腳本 (
 un_inference.py, 
 un_eval.py) 與資料集：
-`ash
+```bash
 git clone https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release.git
 cd 2025-ADL-Final-Challenge-Release
-`
+```
 
 下載完成後，請將本專案的 code/run.sh 複製到 src 資料夾底下。
 
 ### 執行安裝
-`ash
+```bash
 # 1. 賦予腳本執行權限
 chmod +x src/run.sh
-
+```
 # 2. 執行腳本 (請確保硬碟空間 > 100GB 以存放權重)
 # 腳本內建自動修復機制，若下載中斷會自動重試
+```bash
 bash src/run.sh
-`
+```
 
 Note: 腳本會安裝 vllm, unsloth, transformers, bitsandbytes 等高效能推論與訓練套件，並啟用 HF_HUB_ENABLE_HF_TRANSFER 加速下載。  
 
@@ -55,19 +56,19 @@ Note: 腳本會安裝 vllm, unsloth, transformers, bitsandbytes 等高效能推�
 
 請將本專案的 code/algorithms.py 取代原本的 src/algorithms.py，並執行：
 
-`ash
+```bash
 # 使用簡單版評估 (Single Model + Rerank)
 python run_inference.py --algorithm evaluate_rewrite_simple
-`
+```
 
-`ash
+```bash
 # 使用完整版評估 (Full Pipeline)
 python run_inference.py --algorithm evaluate_rewrite
-`
+```
 
 ## 3. 系統架構與推論流程 (Inference Pipeline)
 
-lgorithms.py 實作了本專案的核心邏輯 evaluate_rewrite(toxic_prompt)，流程分為四個階段：
+`algorithms.py` 實作了本專案的核心邏輯 evaluate_rewrite(toxic_prompt)，流程分為四個階段：
 
 ### Phase 1: Context-Aware RAG Retrieval
 利用 Few-shot Learning 增強攻擊的隱蔽性。
@@ -98,7 +99,7 @@ python run_inference.py --algorithm evaluate_rewrite
 
 ## 4. 模型訓練細節 (Training Details)
 
-若需重現我們的 LoRA Adapters (如 dapters/qwen_2.5_7b)，請參考 code/lora_rewritter_training.ipynb。
+若需重現我們的 LoRA Adapters (如 `adapters/qwen_2.5_7b`)，請參考 `code/lora_rewritter_training.ipynb`。
 
 ### Training Configuration
 我們使用 **Unsloth** 框架進行高效微調：
