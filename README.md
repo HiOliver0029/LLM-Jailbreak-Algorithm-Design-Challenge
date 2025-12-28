@@ -4,10 +4,6 @@ title: README
 ---
 
 # ADL 2025 Final Project: Jailbreak Olympics
-<!-- 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Library](https://img.shields.io/badge/Library-vLLM%20%7C%20Unsloth-green)
-![Hardware](https://img.shields.io/badge/GPU-24GB%2B%20VRAM-orange) -->
 
 本專案目標是在解決 LLM Jailbreak 任務中的多樣性與成功率問題。我們提出了一種 **Hybrid Attack Architecture (混合式攻擊架構)**，整合了 **RAG (Retrieval-Augmented Generation)** 檢索增強、**Multi-Model Arena (多模型競技場)** 以及 **Local Sequential Evaluator (本地序列評測)**，透過自動化改寫惡意提示詞 (Prompt Rewriting) 來繞過現代 LLM 的防禦機制。
 
@@ -17,9 +13,10 @@ title: README
 
 | 檔案名稱 | 說明 |
 | :--- | :--- |
-| un.sh | **環境建置與下載腳本**。負責安裝 LLM, Unsloth 等相依套件，驗證模型完整性 (Integrity Check)，並從 Hugging Face 與 Google Drive 自動下載所有 Base Models 與 LoRA Adapters。 |
-| lgorithms.py | **核心推論 (Inference) 程式**。實作完整的攻擊 Pipeline：RAG Retrieval $\to$ Hybrid Generation $\to$ Sequential Evaluation $\to$ Selection Strategy。 |
-| lora_rewritter_training.ipynb | **模型訓練筆記**。展示如何使用 Unsloth 框架對 Qwen/Llama 等模型進行 LoRA 微調，以學習 "Creative Screenwriter" 的攻擊風格。 |
+| code/run.sh | **環境建置與下載腳本**。負責安裝 LLM, Unsloth 等相依套件，驗證模型完整性 (Integrity Check)，並從 Hugging Face 與 Google Drive 自動下載所有 Base Models 與 LoRA Adapters。 |
+| code/algorithms.py | **核心推論 (Inference) 程式**。實作完整的攻擊 Pipeline：RAG Retrieval $\to$ Hybrid Generation $\to$ Sequential Evaluation $\to$ Selection Strategy。 |
+| code/lora_rewritter_training.ipynb | **模型訓練筆記**。展示如何使用 Unsloth 框架對 Qwen/Llama 等模型進行 LoRA 微調，以學習 "Creative Screenwriter" 的攻擊風格。 |
+| esults/ | **實驗結果**。包含不同成本設定下的重寫提示詞結果 (.jsonl 格式)。 |
 
 ---
 
@@ -30,7 +27,7 @@ title: README
 ### 前置作業
 請確保你擁有一個有效的 Hugging Face Token (需有 Read 權限) 以驗證 Gated Models (如 Llama-3, Mistral 等)。
 
-該程式建立於 [2025-ADL-Final-Challenge-Release](https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release) 專案底下，下載該專案後，請把 un.sh放在 src 底下 
+該程式建立於 [2025-ADL-Final-Challenge-Release](https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release) 專案底下，下載該專案後，請把 code/run.sh 放在 src 底下。
 
 ### 執行安裝
 `ash
@@ -46,14 +43,18 @@ Note: 腳本會安裝 vllm, unsloth, transformers, bitsandbytes 等高效能推�
 
 ## 2. 使用方法
 
-該程式建立於 [2025-ADL-Final-Challenge-Release](https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release) 專案底下，請把 lgorithm.py 取代原本的，並執行
+該程式建立於 [2025-ADL-Final-Challenge-Release](https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release) 專案底下，請把 code/algorithms.py 取代原本的 src/algorithms.py，並執行：
 
 `ash
+# 使用簡單版評估 (Single Model + Rerank)
 python run_inference.py --algorithm evaluate_rewrite_simple
 `
+
 `ash
+# 使用完整版評估 (Full Pipeline)
 python run_inference.py --algorithm evaluate_rewrite
 `
+
 ## 3. 系統架構與推論流程 (Inference Pipeline)
 
 lgorithms.py 實作了本專案的核心邏輯 evaluate_rewrite(toxic_prompt)，流程分為四個階段：
@@ -87,7 +88,7 @@ python run_inference.py --algorithm evaluate_rewrite
 
 ## 4. 模型訓練細節 (Training Details)
 
-若需重現我們的 LoRA Adapters (如 dapters/qwen_2.5_7b)，請參考 lora_rewritter_training.ipynb。
+若需重現我們的 LoRA Adapters (如 dapters/qwen_2.5_7b)，請參考 code/lora_rewritter_training.ipynb。
 
 ### Training Configuration
 我們使用 **Unsloth** 框架進行高效微調：
