@@ -16,7 +16,7 @@ title: README
 | code/run.sh | **環境建置與下載腳本**。負責安裝 LLM, Unsloth 等相依套件，驗證模型完整性 (Integrity Check)，並從 Hugging Face 與 Google Drive 自動下載所有 Base Models 與 LoRA Adapters。 |
 | code/algorithms.py | **核心推論 (Inference) 程式**。實作完整的攻擊 Pipeline：RAG Retrieval $\to$ Hybrid Generation $\to$ Sequential Evaluation $\to$ Selection Strategy。 |
 | code/lora_rewritter_training.ipynb | **模型訓練筆記**。展示如何使用 Unsloth 框架對 Qwen/Llama 等模型進行 LoRA 微調，以學習 "Creative Screenwriter" 的攻擊風格。 |
-| esults/ | **實驗結果**。包含不同成本設定下的重寫提示詞結果 (.jsonl 格式)。 |
+| results/ | **實驗結果**。包含不同成本設定下的重寫提示詞結果 (.jsonl 格式)。 |
 
 ---
 
@@ -29,7 +29,9 @@ title: README
 
 本專案依賴於 [2025-ADL-Final-Challenge-Release](https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release) 提供的基礎架構。
 
-請先 clone 該儲存庫以取得必要的執行腳本 (un_inference.py, un_eval.py) 與資料集：
+請先 clone 該儲存庫以取得必要的執行腳本 (
+un_inference.py, 
+un_eval.py) 與資料集：
 `ash
 git clone https://github.com/yenshan0530/2025-ADL-Final-Challenge-Release.git
 cd 2025-ADL-Final-Challenge-Release
