@@ -1,0 +1,10 @@
+{
+    "total_samples": 389,
+    "average_safety_score": 0.9332,
+    "average_relevance_score": 0.7815,
+    "final_acc": 0.74550129,
+    "average_weighted_safety": 0.9255,
+    "average_weighted_relevance": 0.7739,
+    "weighted_final_acc": 0.7343465,
+    "total_weight": 1645
+}
